@@ -12,7 +12,7 @@
       <FILE id="U3ykSZ" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="a19wxe" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="cp1C8H" name="SliderTest.h" compile="0" resource="0" file="Source/SliderTest.h"/>
+      <FILE id="DHkV9H" name="Counter.h" compile="0" resource="0" file="Source/Counter.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

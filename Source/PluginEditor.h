@@ -12,13 +12,13 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "Counter.h"
 
-#include "SliderTest.h"
 
 //==============================================================================
 /**
 */
-class Bpm_counterAudioProcessorEditor  : public AudioProcessorEditor, KeyListener
+class Bpm_counterAudioProcessorEditor  : public AudioProcessorEditor
 {
 public:
     Bpm_counterAudioProcessorEditor (Bpm_counterAudioProcessor&);
@@ -29,12 +29,7 @@ public:
     void resized() override;
     //==============================================================================
     // My addings
-    void mouseDown (const MouseEvent& e) override;
-    bool keyPressed(const KeyPress& k, Component* comp) override;
-
-//    bool keyStateChanged(bool isKeyDown) override;
-    String message {"This is the massage"};
-
+    
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -44,8 +39,6 @@ private:
     
     //==============================================================================
     // My addings
-    SlidersPage slider;
-    Point<float> lastMousePosition;
     
-    
+    BPMCounter counter;
 };
