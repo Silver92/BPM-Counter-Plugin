@@ -32,16 +32,24 @@ public:
         g.setColour (getLookAndFeel().findColour (Label::textColourId));
         g.setFont (40.0f);
         g.drawFittedText (message, getLocalBounds().reduced (10, 0), Justification::centred, 4);
+        
+        g.setColour (getLookAndFeel().findColour (Label::textColourId));
+        g.setFont (40.0f);
+        g.drawFittedText (BPM_Display, getLocalBounds().reduced (10, 0), Justification::centredBottom, 4);
     }
     
     
     bool keyPressed(const KeyPress& k, Component* comp) override {
-        if(k.getKeyCode() == KeyPress::spaceKey) {
+        if(k.getKeyCode() == KeyPress::spaceKey && k.isCurrentlyDown()) {
             countBeats();
+            repaint();
         }
-        repaint();
         return true;
     }
+    
+//    bool keyStateChanged(bool isKeyDown, Component* comp) override {
+//        return true;
+//    }
     
     void mouseDown (const MouseEvent& e) override {
         countBeats();
@@ -50,16 +58,18 @@ public:
     
 private:
     void countBeats() {
-        timeCount.add(Time::getMillisecondCounterHiRes());
+        if (count == 0) {
+            startTime = Time::getMillisecondCounterHiRes();
+        }
+        endTime = Time::getMillisecondCounterHiRes();
         count++;
         message = std::to_string(count);
         if(count == 8) {
-            time = (timeCount.getLast()-timeCount.getFirst())/(count-1);
-            time = 60*1000.0/time;
-            time = round(time, 1);
-            message = std::to_string(time);
-            message = message.substr(0, (message.find_last_of(".")+2));
-            timeCount.clear();
+            duration = (endTime - startTime)/(count-1);
+            duration = 60*1000.0/duration;
+            duration = round(duration, 1);
+            BPM_Display = std::to_string(duration);
+            BPM_Display = BPM_Display.substr(0, (BPM_Display.find_last_of(".")+2));
             count = 0;
         }
     }
@@ -74,9 +84,12 @@ private:
     }
     
 private:
-    double time;
-    Array<double> timeCount;
+    double startTime;
+    double endTime;
+    double duration;
     int count = 0;
-    std::string message {"This is the massage"};
+    std::string message {"This is the count display panel"};
+    std::string BPM_Display {"This is the BPM display panel"};
+    bool isKeyDown = false;
     
 };

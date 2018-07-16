@@ -29,7 +29,7 @@ Bpm_counterAudioProcessorEditor::~Bpm_counterAudioProcessorEditor()
 
 void Bpm_counterAudioProcessorEditor::paint (Graphics& g)
 {
-    
+    g.fillAll(Colour::greyLevel(0.5));
 }
 
 void Bpm_counterAudioProcessorEditor::resized()
